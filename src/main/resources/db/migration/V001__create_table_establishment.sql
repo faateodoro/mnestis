@@ -1,5 +1,5 @@
 CREATE TABLE Establishment (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     cnpj VARCHAR(14) NOT NULL,
     address VARCHAR(150) NOT NULL,
