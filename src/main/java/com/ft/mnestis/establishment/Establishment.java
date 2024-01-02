@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Establishment {
@@ -34,8 +35,7 @@ public class Establishment {
     @Positive
     private int carVacancy;
 
-    @NotBlank
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     public Establishment(String name, String cnpj, String address, String phone, int motorcycleVacancy, int carVacancy) {
         this.name = name;
@@ -44,11 +44,15 @@ public class Establishment {
         this.phone = phone;
         this.motorcycleVacancy = motorcycleVacancy;
         this.carVacancy = carVacancy;
-        this.createdAt = LocalDate.now();
+        this.createdAt = LocalDateTime.now();
     }
 
     @Deprecated
     protected Establishment() {}
+
+    public Establishment(EstablishmentForm form) {
+        this(form.name(), form.cnpj(), form.address(), form.phone(), form.motorcycleVacancy(), form.carVacancy());
+    }
 
     public Long getId() {
         return id;
@@ -78,7 +82,7 @@ public class Establishment {
         return carVacancy;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 }
